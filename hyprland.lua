@@ -15,20 +15,19 @@
 ------------------
 ---- MONITORS ----
 ------------------
--- DP-1: Acer XV272U V3 — max mode is 2560x1440@180Hz
+-- DP-2: Lenovo G25-10 — max mode is 1920x1080@144Hz — positioned LEFT
 hl.monitor({
-    output   = "DP-1",
-    mode     = "2560x1440@180",
+    output   = "DP-2",
+    mode     = "1920x1080@144",
     position = "0x0",
     scale    = 1,
 })
 
--- DP-2: Lenovo G25-10 — max mode is 1920x1080@144Hz (auto-detect had
--- picked 59.93Hz instead, so this is set explicitly)
+-- DP-1: Acer XV272U V3 — max mode is 2560x1440@180Hz — positioned RIGHT
 hl.monitor({
-    output   = "DP-2",
-    mode     = "1920x1080@144",
-    position = "2560x0",
+    output   = "DP-1",
+    mode     = "2560x1440@180",
+    position = "1920x0",
     scale    = 1,
 })
 
