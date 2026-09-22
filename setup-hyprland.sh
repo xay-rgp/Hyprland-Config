@@ -84,6 +84,7 @@ PACMAN_PACKAGES=(
     git
     go
     ttf-hack-nerd
+    quickshell
 )
 
 log "Installing pacman packages: ${PACMAN_PACKAGES[*]}"
