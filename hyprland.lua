@@ -43,7 +43,8 @@ local menu        = "wofi --show drun"
 -------------------
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
-    hl.exec_cmd("waybar")
+    hl.exec_cmd("qs") -- quickshell (replaces waybar); use "quickshell" or
+                       -- "qs -c ~/.config/quickshell" if your setup needs it
 end)
 
 -----------------------
