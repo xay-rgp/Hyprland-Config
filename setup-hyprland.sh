@@ -85,6 +85,7 @@ PACMAN_PACKAGES=(
     go
     ttf-hack-nerd
     quickshell
+    pavucontrol
 )
 
 log "Installing pacman packages: ${PACMAN_PACKAGES[*]}"
