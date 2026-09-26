@@ -1,34 +1,36 @@
 Hyprland Config
 
-A personal Hyprland desktop setup for Arch Linux, built around a clean, minimal workflow with Quickshell as the status bar instead of Waybar.
+A personal Hyprland desktop setup for Arch Linux, built around a clean and minimal workflow with Quickshell as the status bar instead of Waybar.
 
-The repository includes the Hyprland configuration, wallpaper, terminal, launcher styling, Fastfetch configuration, and a setup script that installs the required software and deploys everything automatically.
+This repository contains the Hyprland configuration, wallpaper, terminal and launcher styling, Fastfetch configuration, Quickshell setup, and an installation script that installs the required software and deploys everything automatically.
+
+Warning: This setup is designed for a fresh or disposable Hyprland configuration. The installer removes ~/.config/hypr before deploying the repository configuration. Back up your existing configuration before running it.
 
 Features
 
 Hyprland — Wayland compositor
 
-Quickshell — custom status bar / shell
+Quickshell — Custom desktop shell and status bar
 
-Hyprpaper — wallpaper management
+Hyprpaper — Wallpaper management
 
-Kitty — terminal emulator
+Kitty — Terminal emulator
 
-Wofi — application launcher
+Wofi — Application launcher
 
-Mission Center — system monitor
+Mission Center — System monitor
 
-LibreWolf — privacy-focused browser
+LibreWolf — Privacy-focused web browser
 
 Discord
 
 Steam
 
-Fastfetch — system information
+Fastfetch — System information
 
-Pavucontrol — audio control
+Pavucontrol — Audio control
 
-Nautilus — file manager
+Nautilus — File manager
 
 yay — AUR helper
 
@@ -36,7 +38,7 @@ Flatpak + Flathub
 
 Repository Structure
 
-The repository intentionally keeps most configuration files flat next to the installation script.
+Most configuration files are intentionally kept flat alongside the installation script.
 
 .
 ├── setup-hyprland.sh
@@ -78,7 +80,7 @@ An internet connection
 
 A Wayland-capable GPU
 
-The installer expects to be run as a normal user, not directly as root.
+The installer must be run as a normal user. Do not run the installer directly as root.
 
 Installation
 
@@ -93,44 +95,44 @@ Make the installer executable:
 chmod +x setup-hyprland.sh
 
 
-Run it:
+Run the installer:
 
 ./setup-hyprland.sh
 
 
-The script will request your sudo password when necessary.
+The script will request your sudo password when elevated privileges are required.
 
-Steam / Vulkan
+Steam and Vulkan
 
 Most packages are installed automatically with --noconfirm.
 
-Steam is intentionally different.
-
-The Steam installation remains interactive so you can select the appropriate Vulkan/lib32 provider for your GPU.
+Steam is intentionally installed separately and interactively so you can select the appropriate Vulkan and 32-bit Vulkan packages for your GPU.
 
 Depending on your hardware, you may need packages such as:
 
-NVIDIA:
+NVIDIA
+
 lib32-nvidia-utils
 
-AMD:
+
+AMD
+
 lib32-vulkan-radeon
 
-Intel:
+
+Intel
+
 lib32-vulkan-intel
 
 
-Make sure the Vulkan packages you install match your graphics hardware and driver setup.
+Make sure the Vulkan packages you install match your graphics hardware and existing driver setup.
 
 What the Installer Does
+1. Enables Multilib
 
-The setup script performs the following steps.
+The installer enables the Arch Linux multilib repository if it is not already enabled.
 
-1. Enables multilib
-
-The script enables the Arch Linux multilib repository if it isn't already enabled.
-
-A backup of /etc/pacman.conf is created before modifying it:
+Before modifying /etc/pacman.conf, the script creates a backup:
 
 /etc/pacman.conf.bak
 
@@ -161,32 +163,32 @@ pavucontrol
 
 3. Installs Steam
 
-Steam is installed separately and interactively to allow the appropriate Vulkan provider to be selected.
+Steam is installed separately and interactively so the appropriate Vulkan provider can be selected for your hardware.
 
 4. Installs yay
 
-If yay isn't already installed, the script builds it from the Arch User Repository.
+If yay is not already installed, the installer builds it from the Arch User Repository.
 
-yay is included for convenience and future package management.
+yay is included for convenience and future AUR package management.
 
 5. Configures Flatpak
 
-Flathub is added as a Flatpak repository and Mission Center is installed:
+The installer adds Flathub as a Flatpak repository and installs Mission Center:
 
 io.missioncenter.MissionCenter
 
-6. Deploys the Dotfiles
+6. Deploys the Configuration
 
-Configuration files are copied into their appropriate locations under:
+The configuration files are copied into their appropriate locations under:
 
 ~/.config/
 
 
-The Quickshell directory is copied as a complete directory.
+The entire quickshell/ directory is copied as well.
 
 7. Configures Kitty
 
-The installer adds a Hyprland window rule preventing Kitty from requesting a maximized window if the rule isn't already present.
+The installer adds a Hyprland window rule preventing Kitty from requesting a maximized window, provided that the rule is not already present.
 
 8. Enables Fastfetch
 
@@ -195,13 +197,23 @@ The installer adds:
 fastfetch
 
 
-to ~/.bashrc so Fastfetch runs when Bash starts.
+to:
 
-Configuration Warning
+~/.bashrc
 
-The installer removes the existing ~/.config/hypr directory before deploying the repository configuration.
 
-This is intentional so that old Hyprland configuration files don't interfere with the setup.
+This causes Fastfetch to run whenever a new Bash shell starts.
+
+⚠️ Configuration Warning
+
+The installer removes the existing:
+
+~/.config/hypr
+
+
+directory before deploying the repository configuration.
+
+This is intentional and ensures that old Hyprland configuration files do not interfere with this setup.
 
 If you already have a custom Hyprland configuration, back it up before running the installer.
 
@@ -209,9 +221,15 @@ For example:
 
 cp -r ~/.config/hypr ~/.config/hypr.backup
 
+
+You can restore it later with:
+
+rm -rf ~/.config/hypr
+mv ~/.config/hypr.backup ~/.config/hypr
+
 After Installation
 
-Once the script finishes, completely log out of your current graphical session and start Hyprland again.
+After the installer finishes, completely log out of your current graphical session and start Hyprland again.
 
 A reboot also works:
 
@@ -227,7 +245,7 @@ is not intended to replace a fresh Hyprland session after the initial installati
 
 Customization
 
-The main configuration files are easy to modify directly in the repository.
+The main configuration files can be modified directly in the repository.
 
 Hyprland
 hyprland.lua
@@ -239,7 +257,7 @@ Quickshell
 quickshell/
 
 
-Contains the custom Quickshell configuration used for the desktop shell/status bar.
+Contains the custom Quickshell configuration used for the desktop shell and status bar.
 
 Wallpaper
 
@@ -254,35 +272,39 @@ Kitty
 kitty.conf
 
 
-Contains terminal configuration.
+Contains the Kitty terminal configuration.
 
 Wofi
 wofi-style.css
 
 
-Controls the appearance of the Wofi launcher.
+Controls the appearance of the Wofi application launcher.
 
 Fastfetch
 fastfetch.jsonc
 
 
-Controls the Fastfetch display shown when Bash starts.
+Controls the information displayed by Fastfetch when Bash starts.
 
-Reinstalling / Updating
+Reinstalling or Updating
 
 If you make changes to the repository configuration, you can rerun:
 
 ./setup-hyprland.sh
 
 
-Be aware: the installer clears ~/.config/hypr each time it runs.
+Warning: The installer clears ~/.config/hypr each time it runs.
 
-If you only want to update individual configuration files, you can copy them manually instead of rerunning the complete installer.
+If you only want to update individual configuration files, copy them manually instead of rerunning the entire installer.
+
+For example:
+
+cp hyprland.lua ~/.config/hypr/
 
 Troubleshooting
-Hyprland isn't using the repository configuration
+Hyprland is not using the repository configuration
 
-Check that the deployed file exists:
+Check that the configuration was deployed:
 
 ls -la ~/.config/hypr/
 
@@ -294,43 +316,45 @@ hyprpaper.conf
 mywallpaper.png
 
 
-Also make sure an old configuration wasn't left behind.
+If the directory contains unexpected or old configuration files, remove them and redeploy the repository configuration.
 
-Quickshell isn't starting
+Quickshell is not starting
 
 Check that the configuration was copied:
 
 ls -la ~/.config/quickshell/
 
 
-You can also launch Quickshell manually to check for configuration errors.
+You can also launch Quickshell manually to check for configuration or runtime errors.
 
-Steam has graphics/Vulkan issues
+Steam has graphics or Vulkan issues
 
 Verify that the appropriate Vulkan and 32-bit Vulkan packages for your GPU are installed.
 
 For Steam, the relevant lib32-* driver packages are particularly important.
 
-Fastfetch doesn't appear
+Fastfetch does not appear
 
-Make sure you're using Bash and check:
+Make sure you are using Bash and check whether Fastfetch was added to .bashrc:
 
 grep -n "fastfetch" ~/.bashrc
 
 
-Then start a new shell.
+Then start a new Bash shell:
+
+bash
 
 Disclaimer
 
-This repository contains a personal Arch Linux / Hyprland configuration.
+This repository contains a personal Arch Linux and Hyprland configuration.
 
-Hardware, GPU drivers, monitor layouts, package availability, and system configuration can vary between machines. Review the installer before running it, especially if you already have an existing Hyprland setup.
+Hardware, GPU drivers, monitor layouts, package availability, and system configuration vary between machines. Review setup-hyprland.sh before running it, especially if you already have an existing Hyprland setup.
 
-The configuration is provided as-is and may require adjustments for your hardware.
+The configuration is provided as-is and may require modifications for your hardware or personal setup.
 
 Credits
 
-Built around the following projects:
+This setup is built around the following projects:
 
 Hyprland
 
@@ -350,4 +374,4 @@ Arch Linux
 
 yay
 
-If you use this configuration as a starting point, feel free to fork it and make it your own.
+If you use this configuration as a starting point, feel free to fork it, modify it, and make it your own.
