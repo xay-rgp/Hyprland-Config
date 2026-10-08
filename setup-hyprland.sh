@@ -10,6 +10,7 @@
 #   ./hyprland.lua
 #   ./hyprpaper.conf
 #   ./mywallpaper.png
+#   ./hyprlock.conf
 #   ./wofi-style.css
 #   ./kitty.conf
 #   ./fastfetch.jsonc
@@ -72,6 +73,7 @@ sudo pacman -Syu --noconfirm
 ### ---------------------------------------------------------------------
 PACMAN_PACKAGES=(
     hyprland
+    hyprlock
     hyprpaper
     discord
     flatpak
@@ -166,6 +168,7 @@ copy_config_dir() {
 }
 
 copy_config "$SCRIPT_DIR/hyprland.lua"        "$HOME/.config/hypr/hyprland.lua"
+copy_config "$SCRIPT_DIR/hyprlock.conf"      "$HOME/.config/hypr/hyprlock.conf"
 copy_config "$SCRIPT_DIR/hyprpaper.conf"      "$HOME/.config/hypr/hyprpaper.conf"
 copy_config "$SCRIPT_DIR/mywallpaper.png"     "$HOME/.config/hypr/mywallpaper.png"
 copy_config "$SCRIPT_DIR/wofi-style.css"      "$HOME/.config/wofi/style.css"
