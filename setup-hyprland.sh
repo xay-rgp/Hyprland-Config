@@ -27,12 +27,12 @@
 #   chmod +x setup-hyprland.sh
 #   ./setup-hyprland.sh
 #
-# NOTE: Everything runs with --noconfirm EXCEPT the `steam` install itself,
-# which is left interactive so you can pick the correct vulkan driver
-# provider (nvidia/amd/intel) when pacman prompts for it.
+# NOTE: Everything package-related runs with --noconfirm EXCEPT the `steam`
+# install itself, which is left interactive so you can pick the correct
+# vulkan driver provider (nvidia/amd/intel). `chsh` may also ask for your
+# account password when changing the default shell.
 #
-# yay is installed as an AUR helper for your own future use, even though
-# nothing in this script currently needs the AUR.
+# yay is installed as an AUR helper and used to install the kew music player.
 
 set -euo pipefail
 
@@ -88,6 +88,7 @@ PACMAN_PACKAGES=(
     ttf-hack-nerd
     quickshell
     pavucontrol
+    fish
 )
 
 log "Installing pacman packages: ${PACMAN_PACKAGES[*]}"
@@ -112,6 +113,9 @@ if ! command -v yay >/dev/null 2>&1; then
 else
     log "yay already installed, skipping."
 fi
+
+log "Installing kew music player from the AUR..."
+yay -S --needed --noconfirm kew
 
 ### ---------------------------------------------------------------------
 ### 5. Flatpak + Mission Center
@@ -199,14 +203,33 @@ LUA
 ensure_kitty_maximize_rule
 
 ### ---------------------------------------------------------------------
-### 7. Add fastfetch to .bashrc
+### 7. Configure Fish shell
 ### ---------------------------------------------------------------------
-log "Adding fastfetch to ~/.bashrc..."
-if ! grep -qxF 'fastfetch' "$HOME/.bashrc" 2>/dev/null; then
-    echo -e '\n# Run fastfetch on shell start\nfastfetch' >> "$HOME/.bashrc"
+FISH_CONFIG="$HOME/.config/fish/config.fish"
+mkdir -p "$(dirname "$FISH_CONFIG")"
+
+log "Adding fastfetch to Fish startup..."
+if ! grep -qxF '    fastfetch' "$FISH_CONFIG" 2>/dev/null; then
+    cat >> "$FISH_CONFIG" <<'FISH'
+
+if status is-interactive
+    fastfetch
+end
+FISH
     log "  Added."
 else
     log "  Already present, skipping."
+fi
+
+if ! grep -qxF 'set -g fish_greeting' "$FISH_CONFIG" 2>/dev/null; then
+    echo 'set -g fish_greeting' >> "$FISH_CONFIG"
+fi
+
+log "Setting Fish as the default login shell..."
+if [[ "$(getent passwd "$USER" | cut -d: -f7)" == /usr/bin/fish ]]; then
+    log "Fish is already the default login shell."
+else
+    chsh -s /usr/bin/fish "$USER"
 fi
 
 log "Done! Fully log out and start Hyprland again (or reboot) — hyprland.lua vs .conf priority is only checked once at startup, so 'hyprctl reload' alone will NOT pick this up."
