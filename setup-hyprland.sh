@@ -76,6 +76,7 @@ PACMAN_PACKAGES=(
     hyprlock
     hyprpaper
     discord
+    code
     flatpak
     librewolf
     wofi
