@@ -42,6 +42,8 @@ local menu        = "wofi --show drun"
 ---- AUTOSTART ----
 -------------------
 hl.on("hyprland.start", function()
+    -- Import the display environment before starting the password prompt agent.
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user start hyprpolkitagent.service")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd(os.getenv("HOME") .. "/.config/quickshell/run.sh -d")
 end)

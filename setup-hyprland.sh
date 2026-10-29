@@ -78,6 +78,10 @@ PACMAN_PACKAGES=(
     hyprland
     hyprlock
     hyprpaper
+    hyprpolkitagent
+    polkit
+    udisks2
+    gvfs
     discord
     code
     flatpak
