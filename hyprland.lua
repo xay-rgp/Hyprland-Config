@@ -43,8 +43,7 @@ local menu        = "wofi --show drun"
 -------------------
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpaper")
-    hl.exec_cmd("qs") -- quickshell (replaces waybar); use "quickshell" or
-                       -- "qs -c ~/.config/quickshell" if your setup needs it
+    hl.exec_cmd(os.getenv("HOME") .. "/.config/quickshell/run.sh -d")
 end)
 
 -----------------------
@@ -146,7 +145,6 @@ hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop"), { locked = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set 5%+"), { locked = true, repeating = true })
 
-hl.bind("Print", hl.dsp.exec_cmd("grim"))
 
 hl.window_rule({
     name = "kitty-no-maximize",

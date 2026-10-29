@@ -190,10 +190,10 @@ Make sure the Vulkan packages you install match your graphics hardware and exist
    to:
 
    ```text
-   ~/.bashrc
+   ~/.config/fish/config.fish
    ```
 
-   This causes Fastfetch to run whenever a new Bash shell starts.
+   This causes Fastfetch to run whenever a new interactive Fish shell starts.
 
 ## ⚠️ Configuration Warning
 
@@ -258,7 +258,42 @@ Controls the compositor configuration, keybinds, window rules, startup applicati
 quickshell/
 ```
 
-Contains the custom Quickshell configuration used for the desktop shell and status bar.
+### Integrated Quickshell bar
+
+The included bar is the compact monochrome version: 28 px tall, content-sized
+ends with equal padding, a read-only track/artist display on the left, and a
+12-hour clock in the middle. Hover the clock for CPU/GPU/RAM usage; click it
+for local machine and disk stats. The right menu contains network, audio and
+Bluetooth controls. Spotify-specific controls, VPN, notifications, Lights,
+Night Light and a brightness slider are not included. There is no screenshot
+keybinding or screenshot helper.
+
+Colors live in [`quickshell/theme/monochrome.json`](quickshell/theme/monochrome.json).
+The bar requires no separate `~/quickshell-bar` checkout. Hyprland launches
+`~/.config/quickshell/run.sh -d`; the launcher prevents duplicate instances.
+To restart it manually:
+
+```bash
+~/.config/quickshell/run.sh --restart -d
+```
+
+The setup script reads [`quickshell/packages.txt`](quickshell/packages.txt) for
+bar and keyboard-shortcut dependencies: Quickshell, Hack Nerd Font,
+NetworkManager, BlueZ, PipeWire/PipeWire-Pulse, WirePlumber, libpulse, jq,
+Python, util-linux, udisks2, iproute2, gawk, grep, coreutils, procps-ng,
+playerctl and brightnessctl. Qt modules are installed through Quickshell's
+package dependencies. GPU drivers are unchanged. Brightnessctl is for the
+existing hardware keys, not a bar slider.
+
+The installer enables NetworkManager and Bluetooth for subsequent boots,
+without restarting networking in the current session. If another network
+manager is enabled, resolve that conflict before rebooting. Existing
+Quickshell files are deleted and replaced directly, without backups. Other
+installer behavior remains the same, including replacing `~/.config/hypr`.
+
+The bar is adapted from [SaratAngajalaoffl/dotfiles-quickshell](https://github.com/SaratAngajalaoffl/dotfiles-quickshell/tree/1afda74e30d8d9bdb5c19f4dcd583e144d435f1b).
+See [`quickshell/README.md`](quickshell/README.md) for details.
+
 
 ### Wallpaper
 
@@ -292,7 +327,7 @@ Controls the appearance of the Wofi application launcher.
 fastfetch.jsonc
 ```
 
-Controls the information displayed by Fastfetch when Bash starts.
+Controls the information displayed by Fastfetch when Fish starts.
 
 ## Reinstalling or Updating
 
@@ -350,16 +385,16 @@ For Steam, the relevant `lib32-*` driver packages are particularly important.
 
 ### Fastfetch does not appear
 
-Make sure you are using Bash and check whether Fastfetch was added to `.bashrc`:
+Make sure you are using Fish and check whether Fastfetch was added to `~/.config/fish/config.fish`:
 
 ```bash
-grep -n "fastfetch" ~/.bashrc
+grep -n "fastfetch" ~/.config/fish/config.fish
 ```
 
-Then start a new Bash shell:
+Then start a new Fish shell:
 
 ```bash
-bash
+fish
 ```
 
 ## Disclaimer

@@ -71,6 +71,9 @@ sudo pacman -Syu --noconfirm
 ### ---------------------------------------------------------------------
 ### 2. Install official repo packages (noconfirm) - everything except steam
 ### ---------------------------------------------------------------------
+# Keep runtime and shortcut dependencies beside the bar they support.
+mapfile -t QUICKSHELL_PACKAGES < "$SCRIPT_DIR/quickshell/packages.txt"
+
 PACMAN_PACKAGES=(
     hyprland
     hyprlock
@@ -86,14 +89,17 @@ PACMAN_PACKAGES=(
     base-devel
     git
     go
-    ttf-hack-nerd
-    quickshell
     pavucontrol
     fish
+    "${QUICKSHELL_PACKAGES[@]}"
 )
 
 log "Installing pacman packages: ${PACMAN_PACKAGES[*]}"
 sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
+
+# Enable for the next boot without disrupting the current network session.
+log "Enabling NetworkManager and Bluetooth for subsequent boots..."
+sudo systemctl enable NetworkManager.service bluetooth.service
 
 ### ---------------------------------------------------------------------
 ### 3. Install steam interactively so the vulkan driver provider prompt
@@ -163,8 +169,11 @@ copy_config() {
 copy_config_dir() {
     local src="$1" dst="$2"
     if [[ -d "$src" ]]; then
-        rm -rf "$dst"
-        cp -rf "$src" "$dst"
+        # Replace the previous bar outright; do not retain a backup.
+        rm -rf -- "$dst"
+        mkdir -p "$dst"
+        cp -a "$src/." "$dst/"
+        chmod +x "$dst/run.sh" "$dst/install-dependencies.sh" "$dst/scripts/"*.sh
         log "  -> $dst"
     else
         err "  Missing source directory: $src"

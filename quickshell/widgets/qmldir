@@ -1,0 +1,17 @@
+singleton Registry 1.0 Registry.qml
+WidgetHost 1.0 WidgetHost.qml
+WidgetHome 1.0 WidgetHome.qml
+Placeholder 1.0 Placeholder.qml
+LauncherWidget 1.0 LauncherWidget.qml
+PolkitWidget 1.0 PolkitWidget.qml
+SettingsWidget 1.0 SettingsWidget.qml
+AgentsWidget 1.0 AgentsWidget.qml
+ClipboardWidget 1.0 ClipboardWidget.qml
+EmojiWidget 1.0 EmojiWidget.qml
+ThemeWidget 1.0 ThemeWidget.qml
+PomodoroWidget 1.0 PomodoroWidget.qml
+PomodoroAlarmWidget 1.0 PomodoroAlarmWidget.qml
+AlarmWidget 1.0 AlarmWidget.qml
+AlarmRingingWidget 1.0 AlarmRingingWidget.qml
+PowerWidget 1.0 PowerWidget.qml
+StatsWidget 1.0 StatsWidget.qml

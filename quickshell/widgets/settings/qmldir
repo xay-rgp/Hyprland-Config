@@ -1,0 +1,8 @@
+Section 1.0 Section.qml
+SettingRowBase 1.0 SettingRowBase.qml
+SliderRow 1.0 SliderRow.qml
+ToggleRow 1.0 ToggleRow.qml
+ChoiceRow 1.0 ChoiceRow.qml
+HyprlandPage 1.0 HyprlandPage.qml
+MonitorsPage 1.0 MonitorsPage.qml
+KittyPage 1.0 KittyPage.qml

@@ -1,0 +1,11 @@
+{
+  "//": "Per-machine settings. Copy to local.json (gitignored) and edit; anything left out uses the default.",
+
+  "stats": {
+    "//kubeconfig": "Kubeconfig for the Stats widget's Kubernetes section. Default: $KUBECONFIG, else ~/.kube/config.",
+    "kubeconfig": "~/.kube/config",
+
+    "//context": "Context to show. Default (\"\"): the current context if its API server is on this machine (127.0.0.1 / localhost), else the first such context. Contexts pointing elsewhere are only used when named here.",
+    "context": ""
+  }
+}
