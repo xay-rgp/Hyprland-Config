@@ -188,7 +188,7 @@ copy_config_dir() {
 copy_config "$SCRIPT_DIR/hyprland.lua"        "$HOME/.config/hypr/hyprland.lua"
 copy_config "$SCRIPT_DIR/hyprlock.conf"      "$HOME/.config/hypr/hyprlock.conf"
 copy_config "$SCRIPT_DIR/hyprpaper.conf"      "$HOME/.config/hypr/hyprpaper.conf"
-copy_config "$SCRIPT_DIR/mywallpaper.png"     "$HOME/.config/hypr/mywallpaper.png"
+copy_config "$SCRIPT_DIR/mywallpaper.png"     "$HOME/.config/hypr/wallpaper.png"
 copy_config "$SCRIPT_DIR/wofi-style.css"      "$HOME/.config/wofi/style.css"
 copy_config "$SCRIPT_DIR/kitty.conf"          "$HOME/.config/kitty/kitty.conf"
 copy_config "$SCRIPT_DIR/fastfetch.jsonc"     "$HOME/.config/fastfetch/config.jsonc"

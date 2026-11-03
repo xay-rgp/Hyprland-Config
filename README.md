@@ -47,7 +47,7 @@ After installation, the files are deployed to:
 ├── hypr/
 │   ├── hyprland.lua
 │   ├── hyprpaper.conf
-│   └── mywallpaper.png
+│   └── wallpaper.png
 ├── wofi/
 │   └── style.css
 ├── kitty/
