@@ -10,6 +10,7 @@ Item {
     id: root
 
     readonly property bool active: ShellState.controlCenterOpen
+    readonly property bool hovered: hover.hovered
 
     implicitWidth: row.implicitWidth
     implicitHeight: 24

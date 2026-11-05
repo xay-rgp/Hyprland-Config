@@ -1,3 +1,4 @@
+//@ pragma UseQApplication
 // Quickshell entrypoint.
 //
 // One bar + one frame + one dismiss layer per monitor. Popups are added in

@@ -90,7 +90,7 @@ PanelWindow {
             anchors.right: parent.right
             clip: true
 
-            RightContent {
+            RightCluster {
                 id: rightContent
                 visible: false // Measurement only; ControlCenter owns the status pill.
                 anchors.right: parent.right

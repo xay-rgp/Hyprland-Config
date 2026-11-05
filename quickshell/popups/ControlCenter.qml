@@ -115,7 +115,7 @@ PanelWindow {
     // outside or Escape closes it.
     readonly property bool hoverMode: SettingsService.ccOpenOnHover
     property bool _pointerSeen: false
-    readonly property bool _hovered: bodyHover.hovered
+    readonly property bool _hovered: root.open ? bodyHover.hovered : statusCluster.statusHovered
 
     // Switching modes from the footer button happens with the pointer inside
     // the panel: arm hover-out straight away, or cancel a pending close.
@@ -218,7 +218,8 @@ PanelWindow {
             opacity: Math.max(0, 1 - root.progress * 3)
             visible: opacity > 0
 
-            RightContent {
+            RightCluster {
+                id: statusCluster
                 anchors.right: parent.right
                 anchors.rightMargin: Theme.notchPadding
                 anchors.verticalCenter: parent.verticalCenter
